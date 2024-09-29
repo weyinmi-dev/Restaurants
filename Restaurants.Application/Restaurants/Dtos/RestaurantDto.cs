@@ -1,4 +1,5 @@
 ﻿using Restaurants.Application.Dishes.Dtos;
+using Restaurants.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,25 @@ namespace Restaurants.Application.Restaurants.Dtos
         public string? City { get; set; }
         public string? Street { get; set; }
         public string? PostalCode { get; set;}
-
         public List<DishDto> Dishes { get; set; } = new();
 
+        public static RestaurantDto? FromEntity(Restaurant? restaurant)
+        {
+            if (restaurant == null)
+                return null;
+
+            return new RestaurantDto 
+            { 
+                Id = restaurant.Id,
+                Name = restaurant.Name,
+                Description = restaurant.Description,
+                Category = restaurant.Category,
+                HasDelivery = restaurant.HasDelivery,
+                City = restaurant.Address?.City,
+                Street = restaurant.Address?.Street,
+                PostalCode = restaurant.Address?.PostalCode,
+                Dishes = restaurant.Dishes.Select(DishDto.FromEntity).ToList()
+            };
+        }
     }
 }
