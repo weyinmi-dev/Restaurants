@@ -38,7 +38,7 @@ internal class RestaurantsService : IRestaurantsService
         return restaurantDto;
     }
 
-    public async Task<int> IRestaurantsService.Create(CreateRestaurantDto createRestaurantDto)
+    public async Task<int> Create(CreateRestaurantDto createRestaurantDto)
     {
         _logger.LogInformation("Creating a new restaurant");
         var restaurant = _mapper.Map<Restaurant>(createRestaurantDto);
