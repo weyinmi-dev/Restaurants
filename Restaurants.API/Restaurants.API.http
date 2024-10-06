@@ -1,14 +1,14 @@
 @host = https://localhost
-@port = 44397
+@port = 7005
 
-@Restaurants.API_HostAddress = https://localhost:44397
+@Restaurants.API_HostAddress = https://localhost:7005
 
 
 GET {{Restaurants.API_HostAddress}}/api/restaurants
 
 ###
 
-GET {{Restaurants.API_HostAddress}}/api/restaurants/1
+GET {{Restaurants.API_HostAddress}}/api/restaurants/2
 
 ###
 
@@ -16,7 +16,7 @@ POST {{Restaurants.API_HostAddress}}/api/restaurants
 Content-Type: application/json
 
 {
-  "Name": "Tasty Tests another",
+  "Name": "Tasty Tests another 22",
   "Description": "A cozy restaurant serving a variety of delicious dishes",
   "Category": "Indian",
   "HasDelivery": true,

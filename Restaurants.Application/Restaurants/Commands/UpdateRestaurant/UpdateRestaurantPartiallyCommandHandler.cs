@@ -12,7 +12,7 @@ public class UpdateRestaurantPartiallyCommandHandler(IRestaurantsRepository rest
 {
     public async Task<bool> Handle(UpdateRestaurantPartiallyCommand update, CancellationToken cancellationToken)
     {
-        logger.LogInformation($"Updating restaurant with id: {update.Id}");
+        logger.LogInformation("Updating restaurant with id: {RestaurantId} with {@UpdatedRestaurant}", update.Id, update);
         var restaurant = await restaurantsRepository.GetById(update.Id);
         if (restaurant is null) 
             return false;
