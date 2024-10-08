@@ -7,7 +7,7 @@ using Restaurants.Domain.Repositories;
 
 namespace Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
 
-public class UpdateRestaurantPartiallyCommand: IRequest<bool>
+public class UpdateRestaurantPartiallyCommand: IRequest
 {
     public int Id { get; set; } 
     public string Name { get; set; } = default!;

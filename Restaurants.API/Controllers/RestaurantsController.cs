@@ -9,6 +9,9 @@ using Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
+using Restaurants.Domain.Entities;
+using Restaurants.Domain.Exceptions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Restaurants.API.Controllers;
 
@@ -27,10 +30,6 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
     public async Task<ActionResult<RestaurantDto>> GetById([FromRoute] int id)
     {
         var resturants = await mediator.Send(new GetRestaurantByIdQuery(id));
-
-        if (resturants is null)
-            return NotFound();
-
         return Ok(resturants);
     }
 
@@ -46,12 +45,8 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteRestaurant([FromRoute] int id)
     {
-        var isDeleted = await mediator.Send(new DeleteRestaurantCommand(id));
-
-        if (isDeleted)
-            return NoContent();
-
-        return NotFound();
+        await mediator.Send(new DeleteRestaurantCommand(id));
+        return NoContent();
     }
 
     [HttpPatch("{id}")]
@@ -60,12 +55,8 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> UpdateRestaurant([FromRoute] int id, UpdateRestaurantPartiallyCommand command)
     {
         command.Id = id;
-
-        var restaurantUpdate = await mediator.Send(command);
-
-        if (restaurantUpdate)
-            return NoContent(); //();
-
-        return NotFound($"Restaurant with {id} not found and could not be updated");
+        await mediator.Send(command);
+        
+        return NoContent();
     }
 }
