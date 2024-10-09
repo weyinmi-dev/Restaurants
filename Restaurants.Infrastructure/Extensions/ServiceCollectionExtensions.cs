@@ -18,6 +18,6 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
         services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
-
+        services.AddScoped<IDishesRepository, DishesRepository>();
     }
 }
