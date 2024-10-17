@@ -3,6 +3,7 @@ using Restaurants.Application.Restaurants;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Restaurants.Application.Users.UserContext;
+using Restaurants.Application.Users;
 
 namespace Restaurants.Application.Extensions;
 

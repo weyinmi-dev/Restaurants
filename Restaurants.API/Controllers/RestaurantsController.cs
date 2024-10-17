@@ -1,18 +1,13 @@
-﻿using Azure;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Restaurants.Application.Restaurants;
 using Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 using Restaurants.Application.Restaurants.Commands.DeleteRestaurant;
 using Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
-using Restaurants.Domain.Entities;
-using Restaurants.Domain.Exceptions;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Restaurants.Domain.Constants;
 
 namespace Restaurants.API.Controllers;
 
@@ -37,6 +32,7 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = UserRoles.Owner)]
     public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand command)
     {
         int id = await mediator.Send(command);

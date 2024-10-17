@@ -1,7 +1,8 @@
 @host = https://localhost
-@port = 7005
+@port = 44397
+@token = CfDJ8NXGhGecne1IubF4hofJJZEfGq7y18aPiqShri-W4i7FazFLG804elk5SOgBFi1az-eakZHNWsaBWBjcc72L3jA03I2CGShQL4ncbdsKDsvlgdQVyh7POLgND9F0rp9ixRI_wrJk5Z-p07N0Yk9Q8IfmPPL9XdeNxAxOlvoYQZAk0O2K2YCFrdguEy6a03yv0uBhJGn1Ib0mtFhL9E0cPRrp-gtJ2RkqVka_IgKO8nt9KlXjdHyCLfXUwW2XH4X9l5hG1KTLJIBadwh4KZoe5cV3MGPZXFw5dRaH5jma_8ItX0ZDEjnZQTlu4yaVro6CAZPl-mFC8YgpGu5QWPSA56Ky4BVMOasxm0AgJM4q1VvaHDBEv0-AmRaV-agp85plEHHORj6LgfOnkMrYF-TKAsEoFsPaAnowXi1NGCLpW3B72kyeaiOcN-WuZV6GFs_z99YErhN2pAH50RCYS_Scq3YdccaWurHuKVgbJQsOY7na77wgLtimhQYxyS73fOza-B-t2bmeJ7OgTHVkDHxzhwRG60XHADdUi4IiGfEC_iLzBimV3su8yDQf3nz98K4mrMua89WKp-tjEjsd8XEx5UVqMFgJW_54cUBmfVhCG73dK_oRouoqNIYD_2Zvwce4LKWNGCI1bTkO0pMBOeHAKHPGudOO6XZmrd-rtjkV1HuR_ID3G3jKV3SYB7twJujt8ZP4qkOG8ml6aBPwKkh_XqR1UFyI3Km1dNAZ5g1xJUCHVCCNSno6v-hP_jFkbWXpkL2pVQPGTY4YUoDIsQlqNa9GvnOZ65t1Ol3ND7Be-XG3
 
-@Restaurants.API_HostAddress = https://localhost:7005
+@Restaurants.API_HostAddress = https://localhost:44397
 
 
 GET {{Restaurants.API_HostAddress}}/api/restaurants
@@ -9,14 +10,17 @@ GET {{Restaurants.API_HostAddress}}/api/restaurants
 ###
 
 GET {{Restaurants.API_HostAddress}}/api/restaurants/3
+Authorization: Bearer {{token}}
+
 
 ###
 
 POST {{Restaurants.API_HostAddress}}/api/restaurants
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "Name": "Tasty Tests another 22",
+  "Name": "Tasty Tests another 232",
   "Description": "A cozy restaurant serving a variety of delicious dishes",
   "Category": "Indian",
   "HasDelivery": true,
@@ -61,3 +65,21 @@ Content-Type: application/json
 }
 
 ###
+
+POST {{Restaurants.API_HostAddress}}/api/identity/register
+Content-Type: application/json
+
+{
+    "email": "testuser@test.com",
+    "password": "Password1!"
+}
+
+###
+
+POST {{Restaurants.API_HostAddress}}/api/identity/login
+Content-Type: application/json
+
+{
+    "email": "owner@test.com",
+    "password": "Password1!"
+}
