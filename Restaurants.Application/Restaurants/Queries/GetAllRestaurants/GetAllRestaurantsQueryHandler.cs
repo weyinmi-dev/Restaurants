@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Restaurants.Domain.Constants;
 using Restaurants.Application.Commons;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Domain.Repositories;
@@ -15,7 +16,9 @@ public class GetAllRestaurantsQueryHandler(IRestaurantsRepository restaurantsRep
 
         var (restaurants, totalCount) = await restaurantsRepository.GetAllMatchingAsync(request.searchPhrase,
             request.PageSize,
-            request.PageNumber);
+            request.PageNumber,
+            request.SortBy,
+            request.SortDirection);
 
         var restaurantDtos = mapper.Map<IEnumerable<RestaurantDto>>(restaurants);
 
